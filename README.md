@@ -8,3 +8,5 @@ docker compose up
 ```
 
 puis accéder à la plateforme : http://localhost:9001
+
+Camille, Rebecca, Vy, Dylan

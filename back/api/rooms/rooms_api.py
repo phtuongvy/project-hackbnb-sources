@@ -15,7 +15,8 @@ def list_rooms():
 
    if "category" in request.args:
       category = request.args["category"]
-      rooms = Room.query.filter(text(f"category = '{category}'")).all()
+      rooms = Room.query.filter_by(category=category)
+      #rooms = Room.query.filter(text(f"category = '{category}'")).all()
    else:
       rooms = Room.query.all()
 

@@ -15,12 +15,15 @@ class User(db.Model):
     def __repr__(self):
         return f'<User {self.email!r}>'
     
-    def to_dict(self):
-        return {
+    def to_dict(self, secure=False):
+        res = {
             "id": self.id,
-            "name": self.name,
-            "email": self.email,
+            "name": self.name
         }
+        if not secure:
+            res["email"] = self.email
+            
+        return res
 
     def set_password(self, clear_password: str):
         self.password_hash = md5(clear_password.encode("utf-8")).hexdigest()

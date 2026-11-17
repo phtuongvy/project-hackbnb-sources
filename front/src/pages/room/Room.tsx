@@ -1,3 +1,4 @@
+import DOMPurify from "dompurify"
 import { useEffect, useState, type FormEvent } from "react"
 import { apiRoomDetails } from "../../api/rooms.api"
 import type { Room } from "../../types/room"
@@ -49,7 +50,7 @@ export const RoomPage = () => {
 
                     <h2 className="mt-4 text-md text-gray-300">Hôte : {room.host?.name}</h2>
 
-                    <div className="mt-8" dangerouslySetInnerHTML={{__html: room.description}}></div>
+                    <div className="mt-8" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(room.description)}}></div>
 
                     <div className="m-auto mt-10 rounded-3xl p-8 border-1 border-gray-300">
                         <h2 className="text-xl">

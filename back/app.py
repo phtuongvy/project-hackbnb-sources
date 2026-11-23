@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
+from werkzeug.serving import WSGIRequestHandler
 from database.init import db
 from database.seed import seed_database
 
@@ -38,9 +39,16 @@ def welcome():
    return "Welcome on API"
 
 
+class NoBannerRequestHandler(WSGIRequestHandler):
+   # Do not disclose "Werkzeug/x.y.z Python/x.y.z" in the Server header
+   def version_string(self):
+      return ""
+
+
 if __name__ == '__main__':
    app.run(
       debug=True,
       host="0.0.0.0",
       port=9001,
+      request_handler=NoBannerRequestHandler,
    )
